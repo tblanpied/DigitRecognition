@@ -1,0 +1,62 @@
+body {
+    margin: 0;
+    background-color: rgb(16, 17, 19);
+    overflow: hidden;
+}
+canvas {
+    border: 2px solid black;
+}
+.pixelated {
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -o-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    -ms-interpolation-mode: nearest-neighbor;
+    image-rendering: pixelated;
+}
+#canvas {
+    border: 2px solid black; /* Add a border to the canvas */
+    border-radius: 20px; /* Set border-radius to create rounded corners */
+    position: absolute;
+    left: 50px;
+    top: 50px;
+    cursor: url('pen.cur'), default;
+}
+.clear-btn{
+    width: 30px;
+    height: 30px;
+    left: 50px;
+    top: 5px;
+    padding: 5px;
+    position: absolute;
+    cursor: pointer;
+    fill: #ffffff;
+}
+.clear-btn:hover{
+    fill: #1676b6;
+}
+.prediction{
+    position: absolute;
+    top: 75px;
+    left: 850px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 750px;
+    height: 700px;
+    color: #ffffff;
+}
+.predict-bar{
+    height: 40px;
+    border-radius: 10px;
+    background-color: #1676b6;
+}
+.class-prediction{
+    display: flex;
+    align-items: center;
+}
+.class-label{
+    margin-right: 15px;
+}
+.probability{
+    padding-left: 10px;
+}
