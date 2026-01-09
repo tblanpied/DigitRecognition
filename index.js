@@ -199,7 +199,7 @@ function clearCanvas(event) {
  */
 async function loadModel() {
     // Load the model
-    model = await tf.loadLayersModel('http://localhost:8000/model/model.json');
+    model = await tf.loadLayersModel('model/model.json');
 
     predict();
 }
