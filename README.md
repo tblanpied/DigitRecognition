@@ -2,6 +2,7 @@
 
 * **Author:** Timothée Blanpied 
 * **Created:** 2023/08
+* **Live Demo:** https://digit.demo.blanpied.fr/
 
 DigitRecognition is a small TensorFlow/Keras project that trains a convolutional neural network (CNN) on the MNIST dataset and provides a simple web-based drawing interface to make live digit predictions.
 
