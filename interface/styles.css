@@ -1,62 +1,138 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+:root{
+  --pad: 16px;
+  --gap: 16px;
+  --toolbar-h: 44px;
+}
+
+html, body { height: 100%; }
+
 body {
-    margin: 0;
-    background-color: rgb(16, 17, 19);
-    overflow: hidden;
+  margin: 0;
+  background-color: rgb(16, 17, 19);
+  height: 100dvh;
+  overflow: hidden;
+  color: #ffffff;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 }
-canvas {
-    border: 2px solid black;
+
+.app{
+  height: 100dvh;
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) minmax(260px, 1fr);
+  gap: var(--gap);
+  padding: var(--pad);
+  align-items: center;
+  min-height: 0;
 }
-.pixelated {
-    image-rendering: -moz-crisp-edges;
-    image-rendering: -o-crisp-edges;
-    image-rendering: -webkit-optimize-contrast;
-    -ms-interpolation-mode: nearest-neighbor;
-    image-rendering: pixelated;
+
+/* Canvas side */
+.stage {
+  min-width: 0;
+  min-height: 0;
+  max-height: calc(100dvh - (2 * var(--pad)));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
+.toolbar {
+  height: var(--toolbar-h);
+  display: flex;
+  align-items: center;
+}
+
+.clear-btn {
+  width: 30px;
+  height: 30px;
+  padding: 1px;
+  cursor: pointer;
+  fill: #ffffff;
+  border-radius: 10px;
+}
+.clear-btn:focus { outline: none; }
+.clear-btn:hover { fill: #1676b6; }
+
 #canvas {
-    border: 2px solid black; /* Add a border to the canvas */
-    border-radius: 20px; /* Set border-radius to create rounded corners */
-    position: absolute;
-    left: 50px;
-    top: 50px;
-    cursor: url('pen.cur'), default;
+  width: min(100%, calc(100dvh - (2 * var(--pad)) - var(--toolbar-h)));
+  aspect-ratio: 1 / 1;
+  height: auto;
+  max-height: calc(100dvh - (2 * var(--pad)) - var(--toolbar-h));
+  border: 2px solid black;
+  border-radius: 20px;
+  background: black;
+  touch-action: none;
+  cursor: url("pen.cur"), default;
+  margin-bottom: var(--toolbar-h);
 }
-.clear-btn{
-    width: 30px;
-    height: 30px;
-    left: 50px;
-    top: 5px;
-    padding: 5px;
-    position: absolute;
-    cursor: pointer;
-    fill: #ffffff;
+
+.pixelated {
+  image-rendering: pixelated;
 }
-.clear-btn:hover{
-    fill: #1676b6;
+
+/* Predictions side */
+.prediction {
+  min-height: 0;
+  max-height: calc(100dvh - (2 * var(--pad)));
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 10px;
 }
-.prediction{
-    position: absolute;
-    top: 75px;
-    left: 850px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 750px;
-    height: 700px;
-    color: #ffffff;
+
+.class-prediction {
+  display: grid;
+  grid-template-columns: 1.5rem 1fr 4.2rem;
+  gap: 10px;
+  align-items: center;
 }
-.predict-bar{
-    height: 40px;
-    border-radius: 10px;
-    background-color: #1676b6;
+
+.class-label {
+  margin: 0;
+  font-size: 1.1rem;
 }
-.class-prediction{
-    display: flex;
-    align-items: center;
+
+.bar-track {
+  height: 14px;
+  border-radius: 999px;
+  background: #2a2d33;
+  overflow: hidden;
 }
-.class-label{
-    margin-right: 15px;
+
+.predict-bar {
+  height: 100%;
+  width: 0%;
+  background-color: #1676b6;
 }
-.probability{
-    padding-left: 10px;
+
+.probability {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 900px) {
+  .app {
+    height: 100dvh;
+    grid-template-columns: 1fr;
+    --pred-h: 296px;
+    grid-template-rows: minmax(0, 1fr) var(--pred-h);
+    align-items: start;
+  }
+
+  .stage { min-height: 0; }
+
+  .prediction {
+    min-height: 0;
+    max-height: var(--pred-h);
+    overflow: hidden;
+    justify-content: flex-start;
+  }
+
+  #canvas {
+    max-height: calc(100dvh - (3 * var(--pad)) - var(--toolbar-h) - var(--pred-h)); /* pad + toolbar + predictions */
+    width: min(100%, calc(100dvh - (2 * var(--pad)) - var(--toolbar-h) - var(--pred-h)));
+    margin-bottom: 0;
+  }
 }
