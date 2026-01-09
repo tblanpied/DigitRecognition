@@ -24,7 +24,7 @@ Tech stack
 
 Example usage
 -------------
-1. Start the server with `python3 interface/server.py`.
+1. Start the server with `python3 server.py`. (You must be inside `interface`)
 2. Draw a digit in the canvas.
 3. The frontend will load the TF.js model (if present) and display the predicted digit.
 
@@ -49,7 +49,7 @@ Quickstart (development)
 
 5. Run the web interface locally (serves `interface/` at http://localhost:8000):
 
-	`python3 interface/server.py`
+	`python3 server.py`
 
 	Then open your browser at `http://localhost:8000`.
 
